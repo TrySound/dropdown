@@ -1,0 +1,24 @@
+{
+  "name": "dropdown",
+  "homepage": "https://github.com/TrySound/dropdown",
+  "authors": [
+    "Bogdan Chadkin <trysound@yandex.ru>"
+  ],
+  "description": "Just control all custom dropdowns on your page",
+  "main": "dist/dropdown.js",
+  "keywords": [
+    "dropdown",
+    "list"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "closest": "^1.0.0"
+  }
+}

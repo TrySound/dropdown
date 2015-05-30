@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dropdown</title>
+	<style>
+
+body {
+	margin: 30px;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+
+.header {
+	display: inline-block;
+	position: relative;
+	margin-bottom: 60px;
+}
+
+.header a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.header iframe {
+	position: absolute;
+	top: 5px;
+	left: 100%;
+	margin-left: 15px;
+}
+
+.dropdown {
+	position: relative;
+}
+
+.dropdown-link {
+	cursor: pointer;
+	-webkit-user-selet: none;
+	-moz-user-selet: none;
+	user-selet: none;
+}
+
+.dropdown-list {
+	visibility: hidden;
+	position: absolute;
+	left: 0;
+	top: 100%;
+}
+
+.dropdown-active {
+	z-index: 100;
+	visibility: visible;
+}
+
+
+
+ul {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+li {
+	line-height: 40px;
+	padding: 0 20px;
+}
+
+.dropdown {
+	display: inline-block;
+	border-bottom: 5px solid #e3e3e3;
+	text-align: left;
+}
+
+.dropdown .dropdown {
+	display: block;
+}
+
+.dropdown-link {
+	display: block;
+	margin: 0 -20px;
+	padding: 0 20px;
+}
+
+.dropdown-list {
+	width: 150px;
+	background: #fff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity .2s, transform .2s, visibility 0s .2s;
+}
+
+.dropdown-list .dropdown-list {
+	top: 0;
+	left: 100%;
+	transform: translateX(20px);
+}
+
+.dropdown-list.dropdown-active {
+	opacity: 1;
+	transform: none;
+	transition-delay: 0s;
+}
+
+	</style>
+</head>
+<body>
+
+<h1 class="header">
+	<a class="text-bottom" href="https://github.com/trysound/dropdown">Dropdown</a>
+	<iframe class="text-bottom"
+		src="https://ghbtns.com/github-btn.html?user=trysound&repo=dropdown&type=star&count=true"
+		frameborder="0" scrolling="0" width="90px" height="25px"></iframe>
+</h1>
+
+<ul>
+	<li class="dropdown">
+		<span class="dropdown-link">Link 1</span>
+		<ul class="dropdown-list">
+			<li class="dropdown">
+				<span class="dropdown-link">Link 1</span>
+				<ul class="dropdown-list">
+					<li>Content 1</li>
+					<li>Content 2</li>
+					<li>Content 3</li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<span class="dropdown-link">Link 2</span>
+				<ul class="dropdown-list">
+					<li>Content 1</li>
+					<li>Content 2</li>
+					<li>Content 3</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li class="dropdown">
+		<span class="dropdown-link">Link 2</span>
+		<ul class="dropdown-list">
+			<li class="dropdown">
+				<span class="dropdown-link">Link 1</span>
+				<ul class="dropdown-list">
+					<li>Content 1</li>
+					<li>Content 2</li>
+					<li>Content 3</li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<span class="dropdown-link">Link 2</span>
+				<ul class="dropdown-list">
+					<li>Content 1</li>
+					<li>Content 2</li>
+					<li>Content 3</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+
+
+<script src="https://cdn.rawgit.com/jonathantneal/closest/master/closest.js"></script>
+<script src="src/dropdown.js"></script>
+<script>
+
+dropdown.init();
+
+</script>
+
+</body>
+</html>
