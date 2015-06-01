@@ -1,6 +1,5 @@
 /*!
- * dropdown 0.0.1
- * https://github.com/TrySound/dropdown
+ * dropdown 0.2.0 https://github.com/TrySound/dropdown
  * Copyright 2015 Bogdan Chadkin <trysound@yandex.ru>
  */
 
@@ -11,6 +10,10 @@
 	var linkActive = 'classLinkActive';
 	var listActive = 'classListActive';
 	var instances = [];
+	var cb = {
+		'open': [],
+		'close': []
+	};
 
 	function isAncestor(el, ancestor) {
 		var node = el;
@@ -45,6 +48,12 @@
 			}
 
 			return false;
+		},
+
+		on: function (name, callback) {
+			if((name === 'open' || name === 'close') && typeof callback === 'function') {
+				cb[name].push(callback)
+			}
 		}
 	};
 
@@ -92,20 +101,30 @@
 			var inst = this;
 			var list = link[nextSibling];
 			var opts = inst.opts;
+			var callbacks = cb.open;
+			var i;
 
 			if(list && ( ! opts.list || list.matches(opts.list))) {
+				for(i = 0; i < callbacks.length; i++) {
+					callbacks[i](link, list);
+				}
 				inst.stack.push(link);
 				link.classList.add(opts[linkActive]);
 				list.classList.add(opts[listActive]);
 			}
 		},
 
-		close: function (link) {
+		close: function () {
 			var inst = this;
 			var link = inst.stack.pop();
 			var list = link[nextSibling];
 			var opts = inst.opts;
+			var callbacks = cb.close;
+			var i;
 
+			for(i = 0; i < callbacks.length; i++) {
+				callbacks[i](link, list);
+			}
 			link.classList.remove(opts[linkActive]);
 			list.classList.remove(opts[listActive]);
 		}

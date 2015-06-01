@@ -84,3 +84,15 @@ Default: `classLinkActive value`
 ### dropdown.close()
 
 Close last opened dropdown and return true if it existed
+
+### dropdown.on(name, callback)
+
+`name: 'open' or 'close'`
+
+`callback(link, list)`
+
+##License
+
+[The MIT License (MIT)](LICENSE.md)
+
+Copyright &copy; 2015 Bogdan Chadkin

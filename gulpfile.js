@@ -9,8 +9,7 @@ gulp.task('build', function () {
 	return gulp.src('src/*.js')
 		.pipe(header([
 			'/*!',
-			' * <%= name %> <%= version %>',
-			' * <%= homepage %>',
+			' * <%= name %> <%= version %> <%= homepage %>',
 			' * Copyright <%= new Date().getFullYear() %> <%= author %>',
 			' */\n\n'
 		].join('\n'), pkg))
@@ -24,7 +23,7 @@ gulp.task('build', function () {
 
 gulp.task('dev', function () {
 	gulp.start(['build']);
-	gulp.watch('src/*.js', ['build'])
+	gulp.watch(['package.json', 'src/*.js'], ['build'])
 })
 
 gulp.task('default', ['build']);

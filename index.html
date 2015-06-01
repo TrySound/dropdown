@@ -158,12 +158,20 @@ li {
 	</li>
 </ul>
 
-<script src="https://rawgit.com/jwilsson/domtokenlist/master/dist/domtokenlist.js"></script>
+<script src="https://cdn.rawgit.com/jwilsson/domtokenlist/master/dist/domtokenlist.js"></script>
 <script src="https://cdn.rawgit.com/jonathantneal/closest/master/closest.js"></script>
 <script src="src/dropdown.js"></script>
 <script>
 
 dropdown.init();
+
+dropdown.on('open', function (link) {
+	console.log('open', link)
+});
+
+dropdown.on('close', function (link) {
+	console.log('close', link)
+});
 
 </script>
 
