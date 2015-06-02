@@ -87,9 +87,12 @@ Close last opened dropdown and return true if it existed
 
 ### dropdown.on(name, callback)
 
-`name: 'open' or 'close'`
+**name:** `'open'` or `'close'`
 
-`callback(link, list)`
+**callback:** `function (link, list, opts)`
+
+Could be useful for plugins
+
 
 ##License
 

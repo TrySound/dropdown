@@ -60,19 +60,11 @@
 
 	function Dropdown(opts) {
 		var inst = this;
-		inst.stack = [];
+		var stack = inst.stack = [];
 		inst.opts = opts;
 
 		document.addEventListener('click', function (e) {
-			inst.toggle(e.target);
-		});
-	}
-
-	Dropdown.prototype = {
-		toggle: function (target) {
-			var inst = this;
-			var stack = inst.stack;
-			var opts = inst.opts;
+			var target = e.target;
 			var link = target.closest(opts.link);
 			var i;
 
@@ -84,14 +76,17 @@
 			}
 
 			if(link) {
+				e.preventDefault();
 				if(link.matches('.' + opts[linkActive])) {
 					inst.close();
 				} else {
 					inst.open(link);
 				}
 			}
-		},
+		});
+	}
 
+	Dropdown.prototype = {
 		open: function (link) {
 			var inst = this;
 			var list = link[nextSibling];
@@ -101,7 +96,7 @@
 
 			if(list && ( ! opts.list || list.matches(opts.list))) {
 				for(i = 0; i < callbacks.length; i++) {
-					callbacks[i](link, list);
+					callbacks[i](link, list, opts);
 				}
 				inst.stack.push(link);
 				link.classList.add(opts[linkActive]);
@@ -118,7 +113,7 @@
 			var i;
 
 			for(i = 0; i < callbacks.length; i++) {
-				callbacks[i](link, list);
+				callbacks[i](link, list, opts);
 			}
 			link.classList.remove(opts[linkActive]);
 			list.classList.remove(opts[listActive]);
