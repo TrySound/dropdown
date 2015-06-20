@@ -1,6 +1,6 @@
 {
   "name": "dropdown",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Just control all custom dropdowns on your page",
   "main": "dist/dropdown.js",
   "scripts": {
@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/TrySound/dropdown/issues"
   },
-  "homepage": "https://github.com/TrySound/dropdown"
+  "homepage": "https://github.com/TrySound/dropdown",
+  "dependencies": {
+    "element-closest": "^1.0.0"
+  }
 }

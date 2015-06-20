@@ -1,7 +1,6 @@
 (function () {
 
 	var plugin = 'dropdown';
-	var nextSibling = 'nextElementSibling';
 	var linkActive = 'classLinkActive';
 	var listActive = 'classListActive';
 	var instances = [];
@@ -22,10 +21,23 @@
 		return false;
 	}
 
+	function getListFn(opt) {
+		var type = typeof opt;
+		return type === 'function' ? opt :
+			function (link) {
+				var isString = type === 'string';
+				var list = link.nextElementSibling;
+				if(isString && list && list.matches(opt) || !isString) {
+					return list;
+				}
+			};
+	}
+
 	var dropdown = {
 		init: function (opts) {
 			opts = opts || {};
 			opts.link = opts.link || '.' + plugin + '-link';
+			opts.list = getListFn(opts.list);
 			opts[linkActive] = opts[linkActive] || plugin + '-active';
 			opts[listActive] = opts[listActive] || opts[linkActive];
 
@@ -69,7 +81,7 @@
 			var i;
 
 			for(i = stack.length - 1; ~i; i -= 1) {
-				if(isAncestor(target, stack[i][nextSibling]) || link === stack[i]) {
+				if(link === stack[i] || isAncestor(target, opts.list(stack[i]))) {
 					break;
 				}
 				inst.close();
@@ -89,12 +101,12 @@
 	Dropdown.prototype = {
 		open: function (link) {
 			var inst = this;
-			var list = link[nextSibling];
 			var opts = inst.opts;
+			var list = opts.list(link);
 			var callbacks = cb.open;
 			var i;
 
-			if(list && ( ! opts.list || list.matches(opts.list))) {
+			if(list) {
 				for(i = 0; i < callbacks.length; i++) {
 					callbacks[i](link, list, opts);
 				}
@@ -106,9 +118,9 @@
 
 		close: function () {
 			var inst = this;
-			var link = inst.stack.pop();
-			var list = link[nextSibling];
 			var opts = inst.opts;
+			var link = inst.stack.pop();
+			var list = opts.list(link);
 			var callbacks = cb.close;
 			var i;
 

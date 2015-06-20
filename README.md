@@ -69,7 +69,7 @@ Initialize click listener on links
 
 Default: `'.dropdown-link'`
 
-**list** - selector of content that will be matched with next sibling
+**list** - selector of content that will be matched with next sibling or function(link) return list;
 
 Default: `undefined`
 
